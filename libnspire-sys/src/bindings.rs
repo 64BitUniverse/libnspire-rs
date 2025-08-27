@@ -33,7 +33,7 @@ impl<T> ::std::fmt::Debug for __IncompleteArrayField<T> {
 pub type __uint8_t = ::std::os::raw::c_uchar;
 pub type __uint16_t = ::std::os::raw::c_ushort;
 pub type __uint64_t = ::std::os::raw::c_ulong;
-extern "C" {
+unsafe extern "C" {
     pub fn free(__ptr: *mut ::std::os::raw::c_void);
 }
 #[repr(C)]
@@ -47,14 +47,14 @@ pub type nspire_handle_t = nspire_handle;
 pub struct libusb_device_handle {
     _unused: [u8; 0],
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_init(
         ptr: *mut *mut nspire_handle_t,
         dev: *mut libusb_device_handle,
         is_cx2: bool,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_free(ptr: *mut nspire_handle_t);
 }
 pub const nspire_battery_NSPIRE_BATT_POWERED: nspire_battery = 0;
@@ -510,7 +510,7 @@ fn bindgen_test_layout_nspire_devinfo() {
         )
     );
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_device_info(
         handle: *mut nspire_handle_t,
         i: *mut nspire_devinfo,
@@ -518,7 +518,7 @@ extern "C" {
 }
 pub type nspire_callback =
     ::std::option::Option<unsafe extern "C" fn(arg1: usize, arg2: *mut ::std::os::raw::c_void)>;
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_file_write(
         arg1: *mut nspire_handle_t,
         arg2: *const ::std::os::raw::c_char,
@@ -528,7 +528,7 @@ extern "C" {
         cb_data: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_file_read(
         handle: *mut nspire_handle_t,
         path: *const ::std::os::raw::c_char,
@@ -539,21 +539,21 @@ extern "C" {
         cb_data: *mut ::std::os::raw::c_void,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_file_move(
         handle: *mut nspire_handle_t,
         src: *const ::std::os::raw::c_char,
         dst: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_file_copy(
         handle: *mut nspire_handle_t,
         src: *const ::std::os::raw::c_char,
         dst: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_file_delete(
         handle: *mut nspire_handle_t,
         path: *const ::std::os::raw::c_char,
@@ -661,29 +661,29 @@ fn bindgen_test_layout_nspire_dir_info() {
         )
     );
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_dirlist(
         arg1: *mut nspire_handle_t,
         arg2: *const ::std::os::raw::c_char,
         arg3: *mut *mut nspire_dir_info,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_dirlist_free(d: *mut nspire_dir_info);
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_dir_create(
         handle: *mut nspire_handle_t,
         path: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_dir_delete(
         handle: *mut nspire_handle_t,
         path: *const ::std::os::raw::c_char,
     ) -> ::std::os::raw::c_int;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_attr(
         arg1: *mut nspire_handle_t,
         arg2: *const ::std::os::raw::c_char,
@@ -704,10 +704,10 @@ pub const NSPIRE_ERR_NONEXIST: ::std::os::raw::c_uint = 10;
 pub const NSPIRE_ERR_OSFAILED: ::std::os::raw::c_uint = 11;
 pub const NSPIRE_ERR_MAX: ::std::os::raw::c_uint = 12;
 pub type _bindgen_ty_5 = ::std::os::raw::c_uint;
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_strerror(error: ::std::os::raw::c_int) -> *const ::std::os::raw::c_char;
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_os_send(
         handle: *mut nspire_handle_t,
         data: *mut ::std::os::raw::c_void,
@@ -777,7 +777,7 @@ fn bindgen_test_layout_nspire_image() {
         )
     );
 }
-extern "C" {
+unsafe extern "C" {
     pub fn nspire_screenshot(
         handle: *mut nspire_handle_t,
         ptr: *mut *mut nspire_image,
